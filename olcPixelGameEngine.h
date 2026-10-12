@@ -768,6 +768,8 @@ namespace olc
 		virtual bool OnUserCreate();
 		// Called every frame, and provides you with a time per frame value
 		virtual bool OnUserUpdate(float fElapsedTime);
+		// Called every frame after it has been presented, before the next frame's input is read
+		virtual void OnFramePresented();
 		// Called once on application termination, so you can be one clean coder
 		virtual bool OnUserDestroy();
 
@@ -2703,6 +2705,9 @@ namespace olc
 	bool PixelGameEngine::OnUserUpdate(float fElapsedTime)
 	{ UNUSED(fElapsedTime);  return false; }
 
+	void PixelGameEngine::OnFramePresented()
+	{ }
+
 	bool PixelGameEngine::OnUserDestroy()
 	{ return true; }
 	//////////////////////////////////////////////////////////////////
@@ -2926,6 +2931,8 @@ namespace olc
 			platform->SetWindowTitle(sTitle);
 			nFrameCount = 0;
 		}
+
+		OnFramePresented();
 	}
 
 	void PixelGameEngine::olc_ConstructFontSheet()
